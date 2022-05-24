@@ -496,7 +496,26 @@ char * dt_file; {
     proot = root;
   }
 
-  root = proot;
+  /* Write the trees to files. */
+  // if (strlen(dt_file))
+  // { 
+  //   write_tree(proot,dt_file);
+  //   if (proot == root) /* No pruning was done. */
+  //   {
+  //     printf("Unpruned decision tree written to %s.\n",dt_file);
+  //   }
+  //   else
+  //   {
+  //     char temp_str[LINESIZE];
+
+  //     printf("Pruned decision tree written to %s.\n",dt_file);
+  //     sprintf(temp_str,"%s.unpruned",dt_file);
+  //     write_tree(root,temp_str);
+  //     printf("Unpruned decision tree written to %s.\n",temp_str);
+
+  //     root = proot;
+  //   }
+  // }
   return (root);
 }
 

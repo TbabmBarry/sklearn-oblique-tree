@@ -114,10 +114,13 @@ cdef class Tree:
         return node_cnt
 
     cpdef getCoef(self, int attr_num):
+        global sklearn_root_node
         cdef int node_cnt = self.nodeCount()
-        cdef float[::1] coefs = <float[:node_cnt*attr_num]> preorder_traversal(sklearn_root_node)
-        return np.asarray(coefs)
+        cdef np.ndarray[np.float32_t, ndim=1] coefs = np.empty(attr_num, dtype=np.float32)
+        for i in range(0, attr_num):
+            coefs[i] = sklearn_root_node.coefficients[i]
+        return coefs
 
-
-
-
+        
+    
+ 

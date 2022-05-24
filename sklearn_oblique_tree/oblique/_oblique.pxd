@@ -1,5 +1,6 @@
 import numpy
 cimport numpy
+
 cdef extern from "stdio.h":
     double drand48()
     void srand48(long int seedval)
@@ -35,7 +36,6 @@ cdef extern from "../../oc1_source/mktree.c":
     cdef int axis_parallel
     cdef int cart_mode
 
-
     cdef tree_node* sklearn_root_node
     cdef test_outcome result
 
@@ -55,7 +55,7 @@ cdef extern from "../../oc1_source/mktree.c":
     int tree_depth(tree_node* cur_node)
     int leaf_count(tree_node* cur_node)
     int node_count(tree_node* cur_node)
-    float* preorder_traversal(tree_node* cur_node)
+    # char* export_dtree(tree_node* cur_node)
 
 
 cdef class Tree:
