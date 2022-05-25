@@ -55,7 +55,7 @@ cdef extern from "../../oc1_source/mktree.c":
     int tree_depth(tree_node* cur_node)
     int leaf_count(tree_node* cur_node)
     int node_count(tree_node* cur_node)
-    # char* export_dtree(tree_node* cur_node)
+    float* export_coefs(tree_node* cur_node)
 
 
 cdef class Tree:

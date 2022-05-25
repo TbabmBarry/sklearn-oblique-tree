@@ -114,12 +114,37 @@ cdef class Tree:
         return node_cnt
 
     cpdef getCoef(self, int attr_num):
-        global sklearn_root_node
         cdef int node_cnt = self.nodeCount()
-        cdef np.ndarray[np.float32_t, ndim=1] coefs = np.empty(attr_num, dtype=np.float32)
-        for i in range(0, attr_num):
-            coefs[i] = sklearn_root_node.coefficients[i]
-        return coefs
+        cdef float[::1] coefs = <float[:node_cnt*attr_num]> export_coefs(sklearn_root_node)
+        return np.reshape(np.asarray(coefs), (node_cnt, attr_num))
+
+    # cpdef getCoef(self, int attr_num):
+    #     global sklearn_root_node
+    #     cdef int node_cnt = self.nodeCount()
+    #     cdef np.ndarray[np.float32_t, ndim=2] hp = np.zeros((node_cnt,attr_num), dtype=np.float32)
+    #     cdef tree_node* curr = sklearn_root_node
+    #     cdef tree_node ** st = <tree_node**>malloc(5 * sizeof(tree_node*))
+    #     cdef int num, k = 0
+
+    #     if not st:
+    #         raise MemoryError()
+        
+    #     try:
+    #         while curr != NULL or num > 0:
+    #             while curr != NULL:
+    #                 for i in range(1, attr_num+1):
+    #                     hp[k][i-1] = curr.coefficients[i]
+    #                 k += 1
+    #                 st[num] = curr
+    #                 num += 1
+    #                 curr = curr.left
+    #             num -= 1
+    #             curr = st[num]
+    #             curr = curr.right
+    #         return hp
+    #     finally:
+    #         free(st)
+
 
         
     

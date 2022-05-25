@@ -530,5 +530,35 @@ float* preorder_traversal(cur_node, cur_idx)
   return out;
 }
 
+float* export_coefs(cur_node)
+  struct tree_node *cur_node;
+{
+  extern int no_of_dimensions;
+  float *out;
+  int no_of_nodes = node_count(cur_node);
+  out = (float *)malloc(no_of_dimensions * no_of_nodes * sizeof(float));
+  struct tree_node *curr;
+  curr = cur_node;
+  struct tree_node ** st;
+  st = (struct cur_node**)malloc(10 * sizeof(struct tree_node*));
+  int num, k = 0;
+  while (curr != NULL || num > 0)
+  {
+    while (curr != NULL)
+    {
+      for (int i = 1; i <= no_of_dimensions; i++)
+      {
+        out[k*no_of_dimensions + i-1] = curr->coefficients[i];
+      }
+      k++;
+      st[num++] = curr;
+      curr = curr->left;
+    }
+    curr = st[--num];
+    curr = curr->right;
+  }
+  return out;
+}
+
 /************************************************************************/
 /************************************************************************/
