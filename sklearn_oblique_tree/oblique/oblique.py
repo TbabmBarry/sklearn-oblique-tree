@@ -68,3 +68,6 @@ class ObliqueTree(BaseEstimator, ClassifierMixin):
         :return: an array of floats
         """
         return self.tree.getCoef(attr_num)
+
+    def test(self):
+        return self.tree.test()

@@ -56,6 +56,7 @@ cdef extern from "../../oc1_source/mktree.c":
     int leaf_count(tree_node* cur_node)
     int node_count(tree_node* cur_node)
     float* export_coefs(tree_node* cur_node)
+    char* write_odtree(tree_node* cur_node)
 
 
 cdef class Tree:
@@ -66,3 +67,4 @@ cdef class Tree:
     cpdef leafCount(self)
     cpdef nodeCount(self)
     cpdef getCoef(self, int attr_num)
+    cpdef test(self)

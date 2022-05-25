@@ -519,5 +519,106 @@ float* export_coefs(cur_node)
   return out;
 }
 
+void write_node(cur_node, cur_char_index, dtree)
+  struct tree_node *cur_node;
+  int *cur_char_index;
+  char *dtree;
+{
+  extern int no_of_dimensions, no_of_categories;
+  char *tmp_header = (char*)malloc(sizeof(char)*20);
+
+  // Append node header int dtree array
+  if (strcmp(cur_node->label,"\0") == 0)
+    tmp_header = "Root Hyperplane: ";
+  else
+    sprintf(tmp_header, "%s Hyperplane: ",cur_node->label);
+  for (int i = 0; i < strlen(tmp_header); i++)
+  {
+    dtree[(*cur_char_index)] = tmp_header[i];
+    (*cur_char_index)++;
+  }
+
+  // Append class distribution into dtree array
+  char *tmp_left_label= (char*)malloc(sizeof(char)*30);
+  sprintf(tmp_left_label, "Left = [");
+  for (int i = 1; i <= no_of_categories; i++)
+  {
+    if (i == no_of_categories)
+    {
+      sprintf(tmp_left_label + strlen(tmp_left_label), "%d], ",cur_node->left_count[i]);
+    }
+    else
+    {
+      sprintf(tmp_left_label + strlen(tmp_left_label), "%d,",cur_node->left_count[i]);
+    }
+  }
+  for (int i = 0; i < strlen(tmp_left_label); i++)
+  {
+    dtree[(*cur_char_index)] = tmp_left_label[i];
+    (*cur_char_index)++;
+  }
+  char *tmp_right_label= (char*)malloc(sizeof(char)*40);
+  sprintf(tmp_right_label, "Right = [");
+  for (int i = 1; i <= no_of_categories; i++)
+  {
+    if (i == no_of_categories)
+    {
+      sprintf(tmp_right_label + strlen(tmp_right_label), "%d], ",cur_node->right_count[i]);
+    }
+    else
+    {
+      sprintf(tmp_right_label + strlen(tmp_right_label), "%d,",cur_node->right_count[i]);
+    }
+  }
+  for (int i = 0; i < strlen(tmp_right_label); i++)
+  {
+    dtree[(*cur_char_index)] = tmp_right_label[i];
+    (*cur_char_index)++;
+  }
+
+  // Append oblique split int odtree array
+  char *tmp_split = (char*)malloc(sizeof(char)*100);
+  sprintf(tmp_split, "Oblique Split: ");
+  for (int i = 1; i <= no_of_dimensions; i++)
+  {
+    if (cur_node->coefficients[i])
+	  {
+      sprintf(tmp_split + strlen(tmp_split),"%f x[%d] + ",cur_node->coefficients[i],i);
+    }
+  }
+  sprintf(tmp_split + strlen(tmp_split),"%f = 0\n\n",cur_node->coefficients[no_of_dimensions+1]);
+  for (int i = 0; i < strlen(tmp_split); i++)
+  {
+    dtree[(*cur_char_index)] = tmp_split[i];
+    (*cur_char_index)++;
+  }
+}
+
+float* write_odtree(cur_node)
+  struct tree_node *cur_node;
+{
+  char* out = (char*)malloc(sizeof(char) * 1024);
+  struct tree_node *curr;
+  curr = cur_node;
+  int *cur_char_index = malloc(sizeof *cur_char_index);
+  *cur_char_index = 0;
+
+  struct tree_node ** st;
+  st = (struct cur_node**)malloc(10 * sizeof(struct tree_node*));
+  int num;
+  while (curr != NULL || num > 0)
+  {
+    while (curr != NULL)
+    {
+      write_node(curr, cur_char_index, out);
+      st[num++] = curr;
+      curr = curr->left;
+    }
+    curr = st[--num];
+    curr = curr->right;
+  }
+  return out;
+}
+
 /************************************************************************/
 /************************************************************************/
