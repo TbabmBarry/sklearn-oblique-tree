@@ -20,25 +20,17 @@ tree = ObliqueTree(splitter="cart", number_of_restarts=20, max_perturbations=5, 
 X_train, X_test, y_train, y_test = train_test_split(*load_iris(return_X_y=True), test_size=.4, random_state=random_state)
 
 tree.fit(X_train, y_train)
-# model_dt.fit(X_train, y_train)
 
 predictions = tree.predict(X_test)
-# predictions = model_dt.predict(X_test)
 
 tree_depth = tree.get_depth()
-# tree_depth = model_dt.get_depth()
-
-# leaf_cnt = tree.leafCount()
-# node_cnt = tree.nodeCount()
-
-# coefs = tree.getCoef(X_train.shape[1])
+node_cnt = tree.nodeCount()
+coefs = tree.getCoef(X_train.shape[1])
 tests = tree.test()
-
+tests = [el.decode('UTF-8', 'ignore') for el in tests]
+output = "\n".join("".join(tests).split("\n\n")[:-1])
 print("Iris Accuracy:",accuracy_score(y_test, predictions))
-# print("Num of attr:", X_train.shape[1])
-# print("Leaf count:", leaf_cnt)
 print("Tree depth:", tree_depth)
-# print("Node count:", node_cnt)
-# print("Node coefficients", coefs)
-for i in range(tests.shape[0]):
-    print(tests[i])
+print("Node count:", node_cnt)
+print("Node coefficients:\n", coefs)
+print("Oblique tree:\n", output)
