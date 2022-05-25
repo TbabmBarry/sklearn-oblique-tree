@@ -482,54 +482,13 @@ int node_count(cur_node)
 }
 
 /************************************************************************/
-/* Module name :	preorder					*/ 
-/* Functionality :      Preorder traversal by writing to the array.   */
-/* Parameters : cur_node :      pointer to the root of the subtree whose*/
-/*                              leaves are to be counted.               */
-/* Returns :    number of nodes of the subtree pointed to by "cur_node"*/
-/* Calls modules :      preorder                                 	*/
-/* Is called by modules :       estimate_accuracy (classify.c)		*/
-/*				main (display.c)			*/
+/* Module name :	export_coefs					                                */ 
+/* Functionality :  Non-recursively writing to the array.               */
+/* Parameters : cur_node: pointer to the root of the subtree.           */
+/* Returns :    1-d array of pointers to the coefficients in preorder.  */
+/* Calls modules :      NULL                                 	          */
+/* Is called by modules :       NULL                                    */
 /************************************************************************/
-void preorder(cur_node, cur_idx, ret)
-     struct tree_node *cur_node;
-     int* cur_idx;
-     float* ret;
-{
-  extern int no_of_dimensions;
-  if (cur_node == NULL) return;
-  for (int i=1;i<=no_of_dimensions;i++) {
-    ret[(*cur_idx) * no_of_dimensions + i-1] = cur_node->coefficients[i];
-    // ret[(*cur_idx) * no_of_dimensions + i-1] = i;
-  }
-  (*cur_idx)++;
-  preorder(cur_node->left, cur_idx, ret);
-  preorder(cur_node->right, cur_idx, ret);
-}
-
-/************************************************************************/
-/* Module name :	preorder_traversal					*/ 
-/* Functionality :      Preorder traversal by writing to the array.   */
-/* Parameters : preorder_traversal: pointer to the root of the subtree whose*/
-/*                              leaves are to be counted.               */
-/* Returns :    number of nodes of the subtree pointed to by "cur_node"*/
-/* Calls modules :      preorder                                 	*/
-/* Is called by modules :       estimate_accuracy (classify.c)		*/
-/*				main (display.c)			*/
-/************************************************************************/
-float* preorder_traversal(cur_node, cur_idx)
-     struct tree_node *cur_node;
-     int* cur_idx;
-{
-  extern int no_of_dimensions;
-  float *out;
-  int no_of_nodes = node_count(cur_node);
-  out = (float *)malloc(no_of_dimensions * no_of_nodes * sizeof(float));
-  *cur_idx= 0;
-  preorder(cur_node, cur_idx, out);
-  return out;
-}
-
 float* export_coefs(cur_node)
   struct tree_node *cur_node;
 {
