@@ -145,7 +145,7 @@ cdef class Tree:
     #     finally:
     #         free(st)
 
-    cpdef test(self):
+    cpdef getTree(self):
         cdef char[::1] desc = <char[:1024]> write_odtree(sklearn_root_node)
         return np.asarray(desc)
 

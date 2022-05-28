@@ -26,9 +26,9 @@ predictions = tree.predict(X_test)
 tree_depth = tree.get_depth()
 node_cnt = tree.nodeCount()
 coefs = tree.getCoef(X_train.shape[1])
-tests = tree.test()
-tests = [el.decode('UTF-8', 'ignore') for el in tests]
-output = "\n".join("".join(tests).split("\n\n")[:-1])
+result = tree.getTree()
+result = [el.decode('UTF-8', 'ignore') for el in result]
+output = "\n".join("".join(result).split("\n\n")[:-1])
 print("Iris Accuracy:",accuracy_score(y_test, predictions))
 print("Tree depth:", tree_depth)
 print("Node count:", node_cnt)

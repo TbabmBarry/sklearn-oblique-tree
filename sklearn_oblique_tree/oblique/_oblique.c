@@ -1441,7 +1441,7 @@ struct __pyx_vtabstruct_20sklearn_oblique_tree_7oblique_8_oblique_Tree {
   PyObject *(*leafCount)(struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *, int __pyx_skip_dispatch);
   PyObject *(*nodeCount)(struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *, int __pyx_skip_dispatch);
   PyObject *(*getCoef)(struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *, int, int __pyx_skip_dispatch);
-  PyObject *(*test)(struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *, int __pyx_skip_dispatch);
+  PyObject *(*getTree)(struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *, int __pyx_skip_dispatch);
 };
 static struct __pyx_vtabstruct_20sklearn_oblique_tree_7oblique_8_oblique_Tree *__pyx_vtabptr_20sklearn_oblique_tree_7oblique_8_oblique_Tree;
 
@@ -2298,7 +2298,7 @@ static PyObject *__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_treeDep
 static PyObject *__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_leafCount(CYTHON_UNUSED struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *__pyx_v_self, int __pyx_skip_dispatch); /* proto*/
 static PyObject *__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_nodeCount(CYTHON_UNUSED struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *__pyx_v_self, int __pyx_skip_dispatch); /* proto*/
 static PyObject *__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_getCoef(struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *__pyx_v_self, int __pyx_v_attr_num, int __pyx_skip_dispatch); /* proto*/
-static PyObject *__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_test(CYTHON_UNUSED struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *__pyx_v_self, int __pyx_skip_dispatch); /* proto*/
+static PyObject *__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_getTree(CYTHON_UNUSED struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *__pyx_v_self, int __pyx_skip_dispatch); /* proto*/
 static PyObject *__pyx_array_get_memview(struct __pyx_array_obj *__pyx_v_self); /* proto*/
 static char *__pyx_memoryview_get_item_pointer(struct __pyx_memoryview_obj *__pyx_v_self, PyObject *__pyx_v_index); /* proto*/
 static PyObject *__pyx_memoryview_is_slice(struct __pyx_memoryview_obj *__pyx_v_self, PyObject *__pyx_v_obj); /* proto*/
@@ -2446,7 +2446,7 @@ static const char __pyx_k_pack[] = "pack";
 static const char __pyx_k_size[] = "size";
 static const char __pyx_k_step[] = "step";
 static const char __pyx_k_stop[] = "stop";
-static const char __pyx_k_test[] = "test";
+static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_ASCII[] = "ASCII";
 static const char __pyx_k_class[] = "__class__";
 static const char __pyx_k_dtype[] = "dtype";
@@ -2465,13 +2465,13 @@ static const char __pyx_k_name_2[] = "__name__";
 static const char __pyx_k_pickle[] = "pickle";
 static const char __pyx_k_reduce[] = "__reduce__";
 static const char __pyx_k_struct[] = "struct";
-static const char __pyx_k_test_2[] = "__test__";
 static const char __pyx_k_unique[] = "unique";
 static const char __pyx_k_unpack[] = "unpack";
 static const char __pyx_k_update[] = "update";
 static const char __pyx_k_asarray[] = "asarray";
 static const char __pyx_k_fortran[] = "fortran";
 static const char __pyx_k_getCoef[] = "getCoef";
+static const char __pyx_k_getTree[] = "getTree";
 static const char __pyx_k_memview[] = "memview";
 static const char __pyx_k_predict[] = "predict";
 static const char __pyx_k_reshape[] = "reshape";
@@ -2592,6 +2592,7 @@ static PyObject *__pyx_n_s_format;
 static PyObject *__pyx_n_s_fortran;
 static PyObject *__pyx_n_u_fortran;
 static PyObject *__pyx_n_s_getCoef;
+static PyObject *__pyx_n_s_getTree;
 static PyObject *__pyx_n_s_getstate;
 static PyObject *__pyx_kp_s_got_differing_extents_in_dimensi;
 static PyObject *__pyx_n_s_id;
@@ -2650,7 +2651,6 @@ static PyObject *__pyx_kp_s_strided_and_indirect;
 static PyObject *__pyx_kp_s_stringsource;
 static PyObject *__pyx_n_s_struct;
 static PyObject *__pyx_n_s_test;
-static PyObject *__pyx_n_s_test_2;
 static PyObject *__pyx_n_s_treeDepth;
 static PyObject *__pyx_kp_s_unable_to_allocate_array_data;
 static PyObject *__pyx_kp_s_unable_to_allocate_shape_and_str;
@@ -2666,7 +2666,7 @@ static PyObject *__pyx_pf_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_8treeD
 static PyObject *__pyx_pf_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_10leafCount(struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_12nodeCount(struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_14getCoef(struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *__pyx_v_self, int __pyx_v_attr_num); /* proto */
-static PyObject *__pyx_pf_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_16test(struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_16getTree(struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_18__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_20__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __pyx_array_obj *__pyx_v_self, PyObject *__pyx_v_shape, Py_ssize_t __pyx_v_itemsize, PyObject *__pyx_v_format, PyObject *__pyx_v_mode, int __pyx_v_allocate_buffer); /* proto */
@@ -4754,13 +4754,13 @@ static PyObject *__pyx_pf_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_14getC
 /* "sklearn_oblique_tree/oblique/_oblique.pyx":148
  *     #         free(st)
  * 
- *     cpdef test(self):             # <<<<<<<<<<<<<<
+ *     cpdef getTree(self):             # <<<<<<<<<<<<<<
  *         cdef char[::1] desc = <char[:1024]> write_odtree(sklearn_root_node)
  *         return np.asarray(desc)
  */
 
-static PyObject *__pyx_pw_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_17test(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_test(CYTHON_UNUSED struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *__pyx_v_self, int __pyx_skip_dispatch) {
+static PyObject *__pyx_pw_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_17getTree(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_getTree(CYTHON_UNUSED struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *__pyx_v_self, int __pyx_skip_dispatch) {
   __Pyx_memviewslice __pyx_v_desc = { 0, 0, { 0 }, { 0 }, { 0 } };
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -4774,7 +4774,7 @@ static PyObject *__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_test(CY
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("test", 0);
+  __Pyx_RefNannySetupContext("getTree", 0);
   /* Check if called by wrapper */
   if (unlikely(__pyx_skip_dispatch)) ;
   /* Check if overridden in Python */
@@ -4784,9 +4784,9 @@ static PyObject *__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_test(CY
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_test); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 148, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_getTree); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 148, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_17test)) {
+      if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_17getTree)) {
         __Pyx_XDECREF(__pyx_r);
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_3 = __pyx_t_1; __pyx_t_4 = NULL;
@@ -4824,7 +4824,7 @@ static PyObject *__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_test(CY
 
   /* "sklearn_oblique_tree/oblique/_oblique.pyx":149
  * 
- *     cpdef test(self):
+ *     cpdef getTree(self):
  *         cdef char[::1] desc = <char[:1024]> write_odtree(sklearn_root_node)             # <<<<<<<<<<<<<<
  *         return np.asarray(desc)
  * 
@@ -4850,7 +4850,7 @@ static PyObject *__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_test(CY
   __pyx_t_7.data = NULL;
 
   /* "sklearn_oblique_tree/oblique/_oblique.pyx":150
- *     cpdef test(self):
+ *     cpdef getTree(self):
  *         cdef char[::1] desc = <char[:1024]> write_odtree(sklearn_root_node)
  *         return np.asarray(desc)             # <<<<<<<<<<<<<<
  * 
@@ -4887,7 +4887,7 @@ static PyObject *__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_test(CY
   /* "sklearn_oblique_tree/oblique/_oblique.pyx":148
  *     #         free(st)
  * 
- *     cpdef test(self):             # <<<<<<<<<<<<<<
+ *     cpdef getTree(self):             # <<<<<<<<<<<<<<
  *         cdef char[::1] desc = <char[:1024]> write_odtree(sklearn_root_node)
  *         return np.asarray(desc)
  */
@@ -4900,7 +4900,7 @@ static PyObject *__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_test(CY
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(((PyObject *)__pyx_t_6));
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
-  __Pyx_AddTraceback("sklearn_oblique_tree.oblique._oblique.Tree.test", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("sklearn_oblique_tree.oblique._oblique.Tree.getTree", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_desc, 1);
@@ -4910,28 +4910,28 @@ static PyObject *__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_test(CY
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_17test(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_17test(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_17getTree(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_17getTree(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("test (wrapper)", 0);
-  __pyx_r = __pyx_pf_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_16test(((struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *)__pyx_v_self));
+  __Pyx_RefNannySetupContext("getTree (wrapper)", 0);
+  __pyx_r = __pyx_pf_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_16getTree(((struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_16test(struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *__pyx_v_self) {
+static PyObject *__pyx_pf_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_16getTree(struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("test", 0);
+  __Pyx_RefNannySetupContext("getTree", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_test(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 148, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_getTree(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4940,7 +4940,7 @@ static PyObject *__pyx_pf_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_16test
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("sklearn_oblique_tree.oblique._oblique.Tree.test", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("sklearn_oblique_tree.oblique._oblique.Tree.getTree", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -19497,7 +19497,7 @@ static PyMethodDef __pyx_methods_20sklearn_oblique_tree_7oblique_8_oblique_Tree[
   {"leafCount", (PyCFunction)__pyx_pw_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_11leafCount, METH_NOARGS, 0},
   {"nodeCount", (PyCFunction)__pyx_pw_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_13nodeCount, METH_NOARGS, 0},
   {"getCoef", (PyCFunction)__pyx_pw_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_15getCoef, METH_O, 0},
-  {"test", (PyCFunction)__pyx_pw_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_17test, METH_NOARGS, 0},
+  {"getTree", (PyCFunction)__pyx_pw_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_17getTree, METH_NOARGS, 0},
   {"__reduce_cython__", (PyCFunction)__pyx_pw_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_19__reduce_cython__, METH_NOARGS, 0},
   {"__setstate_cython__", (PyCFunction)__pyx_pw_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_21__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
@@ -20404,6 +20404,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_fortran, __pyx_k_fortran, sizeof(__pyx_k_fortran), 0, 0, 1, 1},
   {&__pyx_n_u_fortran, __pyx_k_fortran, sizeof(__pyx_k_fortran), 0, 1, 0, 1},
   {&__pyx_n_s_getCoef, __pyx_k_getCoef, sizeof(__pyx_k_getCoef), 0, 0, 1, 1},
+  {&__pyx_n_s_getTree, __pyx_k_getTree, sizeof(__pyx_k_getTree), 0, 0, 1, 1},
   {&__pyx_n_s_getstate, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},
   {&__pyx_kp_s_got_differing_extents_in_dimensi, __pyx_k_got_differing_extents_in_dimensi, sizeof(__pyx_k_got_differing_extents_in_dimensi), 0, 0, 1, 0},
   {&__pyx_n_s_id, __pyx_k_id, sizeof(__pyx_k_id), 0, 0, 1, 1},
@@ -20462,7 +20463,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_stringsource, __pyx_k_stringsource, sizeof(__pyx_k_stringsource), 0, 0, 1, 0},
   {&__pyx_n_s_struct, __pyx_k_struct, sizeof(__pyx_k_struct), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
-  {&__pyx_n_s_test_2, __pyx_k_test_2, sizeof(__pyx_k_test_2), 0, 0, 1, 1},
   {&__pyx_n_s_treeDepth, __pyx_k_treeDepth, sizeof(__pyx_k_treeDepth), 0, 0, 1, 1},
   {&__pyx_kp_s_unable_to_allocate_array_data, __pyx_k_unable_to_allocate_array_data, sizeof(__pyx_k_unable_to_allocate_array_data), 0, 0, 1, 0},
   {&__pyx_kp_s_unable_to_allocate_shape_and_str, __pyx_k_unable_to_allocate_shape_and_str, sizeof(__pyx_k_unable_to_allocate_shape_and_str), 0, 0, 1, 0},
@@ -20857,7 +20857,7 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_vtable_20sklearn_oblique_tree_7oblique_8_oblique_Tree.leafCount = (PyObject *(*)(struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *, int __pyx_skip_dispatch))__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_leafCount;
   __pyx_vtable_20sklearn_oblique_tree_7oblique_8_oblique_Tree.nodeCount = (PyObject *(*)(struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *, int __pyx_skip_dispatch))__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_nodeCount;
   __pyx_vtable_20sklearn_oblique_tree_7oblique_8_oblique_Tree.getCoef = (PyObject *(*)(struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *, int, int __pyx_skip_dispatch))__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_getCoef;
-  __pyx_vtable_20sklearn_oblique_tree_7oblique_8_oblique_Tree.test = (PyObject *(*)(struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *, int __pyx_skip_dispatch))__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_test;
+  __pyx_vtable_20sklearn_oblique_tree_7oblique_8_oblique_Tree.getTree = (PyObject *(*)(struct __pyx_obj_20sklearn_oblique_tree_7oblique_8_oblique_Tree *, int __pyx_skip_dispatch))__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_getTree;
   if (PyType_Ready(&__pyx_type_20sklearn_oblique_tree_7oblique_8_oblique_Tree) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_20sklearn_oblique_tree_7oblique_8_oblique_Tree.tp_print = 0;
@@ -21223,7 +21223,7 @@ if (!__Pyx_RefNanny) {
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test_2, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "View.MemoryView":209

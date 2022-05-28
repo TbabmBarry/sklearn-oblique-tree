@@ -69,5 +69,5 @@ class ObliqueTree(BaseEstimator, ClassifierMixin):
         """
         return self.tree.getCoef(attr_num)
 
-    def test(self):
-        return self.tree.test()
+    def getTree(self):
+        return self.tree.getTree()

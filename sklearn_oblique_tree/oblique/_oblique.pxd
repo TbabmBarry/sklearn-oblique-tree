@@ -67,4 +67,4 @@ cdef class Tree:
     cpdef leafCount(self)
     cpdef nodeCount(self)
     cpdef getCoef(self, int attr_num)
-    cpdef test(self)
+    cpdef getTree(self)
