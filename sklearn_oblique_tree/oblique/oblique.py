@@ -47,21 +47,21 @@ class ObliqueTree(BaseEstimator, ClassifierMixin):
         """
         return self.tree.treeDepth()
 
-    def leafCount(self):
+    def get_leaf_cnt(self):
         """
         Return the number of fitted tree leaf nodes
         :return: an integer count
         """
         return self.tree.leafCount()
 
-    def nodeCount(self):
+    def get_node_cnt(self):
         """
         Return the number of fitted tree internal nodes
         :return: an integer count
         """
         return self.tree.nodeCount()
 
-    def getCoef(self, attr_num):
+    def get_coef_arr(self, attr_num):
         """
         Return an array of pre ordered coefficients for each node
         :param attr_num: an integer representing the number of attributes
@@ -69,5 +69,8 @@ class ObliqueTree(BaseEstimator, ClassifierMixin):
         """
         return self.tree.getCoef(attr_num)
 
-    def getTree(self):
-        return self.tree.getTree()
+    def write_tree(self):
+        result = self.tree.getTree()
+        result = [el.decode('UTF-8', 'ignore') for el in result]
+        output = "\n".join("".join(result).split("\n\n")[:-1])
+        return output

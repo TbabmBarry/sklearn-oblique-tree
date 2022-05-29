@@ -12,7 +12,6 @@ random_state = 2
 #
 # For multivariate CART select 'cart' splitter
 # tree = ObliqueTree(splitter="cart", number_of_restarts=20, max_perturbations=10, random_state=random_state)
-# model_dt = DecisionTreeClassifier(criterion='entropy', max_depth=10)
 
 # Consider only oblique splits
 # tree = ObliqueTree(splitter="oc1", number_of_restarts=20, max_perturbations=5, random_state=random_state)
@@ -27,11 +26,10 @@ tree.fit(X_train, y_train)
 predictions = tree.predict(X_test)
 
 tree_depth = tree.get_depth()
-node_cnt = tree.nodeCount()
-coefs = tree.getCoef(X_train.shape[1])
-result = tree.getTree()
-result = [el.decode('UTF-8', 'ignore') for el in result]
-output = "\n".join("".join(result).split("\n\n")[:-1])
+node_cnt = tree.get_node_cnt()
+coefs = tree.get_coef_arr(X_train.shape[1])
+output = tree.write_tree()
+
 print("Iris Accuracy:",accuracy_score(y_test, predictions))
 print("Tree depth:", tree_depth)
 print("Node count:", node_cnt)
