@@ -6,16 +6,19 @@ from sklearn.tree import DecisionTreeClassifier
 
 random_state = 2
 
-#see Murthy, et all for details.
-#For oblique with consideration of axis parallel
+# See Murthy, et all for details.
+# For oblique with consideration of axis parallel
 # tree = ObliqueTree(splitter="oc1, axis_parallel", number_of_restarts=20, max_perturbations=5, random_state=random_state)
 #
-#For multivariate CART select 'cart' splitter
-tree = ObliqueTree(splitter="cart", number_of_restarts=20, max_perturbations=5, random_state=random_state)
+# For multivariate CART select 'cart' splitter
+# tree = ObliqueTree(splitter="cart", number_of_restarts=20, max_perturbations=10, random_state=random_state)
 # model_dt = DecisionTreeClassifier(criterion='entropy', max_depth=10)
 
-#consider only oblique splits
+# Consider only oblique splits
 # tree = ObliqueTree(splitter="oc1", number_of_restarts=20, max_perturbations=5, random_state=random_state)
+
+# For bivariate with consideration of axis parallel (default)
+tree = ObliqueTree(splitter="bivariate", number_of_restarts=20, max_perturbations=10, random_state=random_state) 
 
 X_train, X_test, y_train, y_test = train_test_split(*load_iris(return_X_y=True), test_size=.4, random_state=random_state)
 

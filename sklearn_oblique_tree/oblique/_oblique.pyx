@@ -32,14 +32,18 @@ cdef class Tree:
         global oblique
         global axis_parallel
         global cart_mode
+        global bivariate
         oblique = False
         axis_parallel = False
         cart_mode = False
+        bivariate = False
 
         if "oc1" in splitter:
             oblique = True
         if "cart" in splitter: #if this is set, the implementation overrides the other splitters.
             cart_mode = True
+        if "bivariate" in splitter:
+            bivariate = True
         if "axis_parallel" in splitter:
             axis_parallel = True
 

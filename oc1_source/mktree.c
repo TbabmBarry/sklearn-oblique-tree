@@ -44,9 +44,10 @@ int no_of_restarts = 20, no_of_folds = 0;
 int normalize = TRUE;
 int unlabeled = FALSE, verbose = FALSE, veryverbose = FALSE;
 int order_of_perturbation = BEST_FIRST;
-int oblique = TRUE;
+int oblique = FALSE;
 int axis_parallel = TRUE;
 int cart_mode = FALSE;
+int bivariate = FALSE;
 int coeff_modified = FALSE;
 int cycle_count = 0;
 int * left_count = NULL, * right_count = NULL;
@@ -588,7 +589,13 @@ int cur_no_of_points; {
     cur_impurity = axis_parallel_split(cur_points, cur_no_of_points);
     if (cur_impurity && (strlen(node_str) == 0 ||
         cur_no_of_points > TOO_SMALL_FOR_OBLIQUE_SPLIT)) {
-          // cur_impurity = cart_split(cur_points, cur_no_of_points, node_str);
+          cur_impurity = cart_split(cur_points, cur_no_of_points, node_str);
+          // cur_impurity = bivariate_split(cur_points, cur_no_of_points, node_str);
+        }
+  } else if (bivariate) {
+    cur_impurity = axis_parallel_split(cur_points, cur_no_of_points);
+    if (cur_impurity && (strlen(node_str) == 0 ||
+        cur_no_of_points > TOO_SMALL_FOR_OBLIQUE_SPLIT)) {
           cur_impurity = bivariate_split(cur_points, cur_no_of_points, node_str);
         }
   } else {

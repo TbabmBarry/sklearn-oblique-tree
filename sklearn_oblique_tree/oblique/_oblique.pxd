@@ -35,6 +35,7 @@ cdef extern from "../../oc1_source/mktree.c":
     cdef int oblique
     cdef int axis_parallel
     cdef int cart_mode
+    cdef int bivariate
 
     cdef tree_node* sklearn_root_node
     cdef test_outcome result
