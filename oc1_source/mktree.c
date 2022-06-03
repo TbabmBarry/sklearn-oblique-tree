@@ -593,7 +593,7 @@ int cur_no_of_points; {
           // cur_impurity = bivariate_split(cur_points, cur_no_of_points, node_str);
         }
   } else if (bivariate) {
-    cur_impurity = axis_parallel_split(cur_points, cur_no_of_points);
+    // cur_impurity = axis_parallel_split(cur_points, cur_no_of_points);
     if (cur_impurity && (strlen(node_str) == 0 ||
         cur_no_of_points > TOO_SMALL_FOR_OBLIQUE_SPLIT)) {
           cur_impurity = bivariate_split(cur_points, cur_no_of_points, node_str);
