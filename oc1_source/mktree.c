@@ -590,10 +590,8 @@ int cur_no_of_points; {
     if (cur_impurity && (strlen(node_str) == 0 ||
         cur_no_of_points > TOO_SMALL_FOR_OBLIQUE_SPLIT)) {
           cur_impurity = cart_split(cur_points, cur_no_of_points, node_str);
-          // cur_impurity = bivariate_split(cur_points, cur_no_of_points, node_str);
         }
   } else if (bivariate) {
-    // coeff_modified = TRUE;
     cur_impurity = axis_parallel_split(cur_points, cur_no_of_points);
     if (cur_impurity && (strlen(node_str) == 0 ||
         cur_no_of_points > TOO_SMALL_FOR_OBLIQUE_SPLIT)) {
@@ -781,7 +779,6 @@ char * cur_label; {
   double cart_perturb(), cart_perturb_constant();
 
   /*Starts with the best axis parallel hyperplane. */
-  
   find_values(cur_points, cur_no_of_points);
   set_counts(cur_points, cur_no_of_points, 1);
   cur_error = compute_impurity(cur_no_of_points);

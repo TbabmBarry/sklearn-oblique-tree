@@ -47,8 +47,8 @@ def dataPreprocessing():
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.4, random_state=101)
     return X_train, X_test, y_train, y_test
 
-X_train, X_test, y_train, y_test = train_test_split(*load_iris(return_X_y=True), test_size=.4, random_state=random_state)
-# X_train, X_test, y_train, y_test = dataPreprocessing()
+# X_train, X_test, y_train, y_test = train_test_split(*load_iris(return_X_y=True), test_size=.4, random_state=random_state)
+X_train, X_test, y_train, y_test = dataPreprocessing()
 
 tree.fit(X_train, y_train)
 
@@ -59,8 +59,8 @@ node_cnt = tree.get_node_cnt()
 coefs = tree.get_coef_arr(X_train.shape[1])
 output = tree.write_tree()
 
-print("Iris Accuracy:",accuracy_score(y_test, predictions))
-# print("Penguins Accuracy:",accuracy_score(y_test, predictions))
+# print("Iris Accuracy:",accuracy_score(y_test, predictions))
+print("Penguins Accuracy:",accuracy_score(y_test, predictions))
 print("Tree depth:", tree_depth)
 print("Node count:", node_cnt)
 print("Node coefficients:\n", coefs)
