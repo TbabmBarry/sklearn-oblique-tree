@@ -593,7 +593,8 @@ int cur_no_of_points; {
           // cur_impurity = bivariate_split(cur_points, cur_no_of_points, node_str);
         }
   } else if (bivariate) {
-    // cur_impurity = axis_parallel_split(cur_points, cur_no_of_points);
+    // coeff_modified = TRUE;
+    cur_impurity = axis_parallel_split(cur_points, cur_no_of_points);
     if (cur_impurity && (strlen(node_str) == 0 ||
         cur_no_of_points > TOO_SMALL_FOR_OBLIQUE_SPLIT)) {
           cur_impurity = bivariate_split(cur_points, cur_no_of_points, node_str);
@@ -775,7 +776,7 @@ double bivariate_split(cur_points, cur_no_of_points, cur_label)
 POINT ** cur_points;
 int cur_no_of_points;
 char * cur_label; {
-  int cur_coeff, init_coeff, i;
+  int second_coeff, init_coeff, i;
   double cur_error, new_error, best_cur_error, prev_impurity, myabs();
   double cart_perturb(), cart_perturb_constant();
 
@@ -784,58 +785,81 @@ char * cur_label; {
   find_values(cur_points, cur_no_of_points);
   set_counts(cur_points, cur_no_of_points, 1);
   cur_error = compute_impurity(cur_no_of_points);
-  cycle_count = 0;
+  
   best_cur_error = cur_error;
   for (i = 1; i <= no_of_coeffs; i++) {
     best_coeff_array[i] = coeff_array[i];
   }
-  init_coeff = 1;
-  for (i = 1; i < no_of_coeffs; i++) {
-    if (coeff_array[i] == 1) init_coeff = i;
-  }
-
-  while (TRUE) {
-    if (cur_error == 0.0)
+  // init_coeff = 1;
+  // for (i = 1; i < no_of_coeffs; i++) {
+  //   if (coeff_array[i] == 1) init_coeff = i;
+  // }
+  for (init_coeff = 1; init_coeff < no_of_coeffs; init_coeff++)
+  {
+    for (second_coeff = 1; second_coeff < no_of_coeffs && second_coeff != init_coeff; second_coeff++)
     {
-      break;
-    }
-    cycle_count++;
-    if (cycle_count != 1)
-    {
-      prev_impurity = best_cur_error;
-    }
-    for (cur_coeff = 1; cur_coeff < no_of_coeffs && cur_coeff != init_coeff; cur_coeff++) {
-      new_error = cart_perturb(cur_points, cur_no_of_points, cur_coeff, cur_error);
-      if (new_error <= best_cur_error) {
-        if (update_coefficients(cur_points, cur_no_of_points)) {
-          best_cur_error = new_error;
-
-          // write_hyperplane(animationfile, cur_label);
-          if (best_cur_error == 0)
-          {
-            break;
+      for (i = 1; i <= no_of_coeffs; i++) {
+        if (i == init_coeff) coeff_array[i] = 1;
+        else coeff_array[i] = 0;
+      }
+      coeff_modified = TRUE;
+      find_values(cur_points, cur_no_of_points);
+      set_counts(cur_points, cur_no_of_points, 1);
+      cur_error = compute_impurity(cur_no_of_points);
+      cycle_count = 0;
+      while (TRUE)
+      {
+        if (cur_error == 0.0)
+        {
+          break;
+        }
+        cycle_count++;
+        if (cycle_count != 1)
+        {
+          prev_impurity = cur_error;
+        }
+        // Step 1: init_coeff
+        new_error = cart_perturb(cur_points, cur_no_of_points, init_coeff, cur_error);
+        if (new_error <= cur_error && alter_coefficients(cur_points, cur_no_of_points)) {
+          cur_error = new_error;
+          if (cur_error == 0) break;
+        }
+        // Step 2: second_coeff
+        new_error = cart_perturb(cur_points, cur_no_of_points, second_coeff, cur_error);
+        if (new_error <= cur_error && alter_coefficients(cur_points, cur_no_of_points)) {
+          cur_error = new_error;
+          if (cur_error == 0) break;
+        }
+        if (cur_error != 0) {
+          new_error = cart_perturb_constant(cur_points, cur_no_of_points, cur_error);
+          if (new_error <= cur_error && alter_coefficients(cur_points, cur_no_of_points)) {
+            cur_error = new_error;
           }
         }
+        if (cycle_count > MAX_CART_CYCLES)
+          /* Cart multivariate algorithm can get stuck in some domains.
+            Arbitrary tie breaker. */
+          break;
+
+        if (cycle_count != 1 && myabs(prev_impurity - cur_error) < TOLERANCE)
+          break;
+      }
+      if (cur_error < best_cur_error) {
+        update_coefficients(cur_points, cur_no_of_points);
+        best_cur_error = cur_error;
+        if (best_cur_error == 0) break;
       }
     }
-    if (cycle_count > MAX_CART_CYCLES)
-      /* Cart multivariate algorithm can get stuck in some domains.
-         Arbitrary tie breaker. */
-      break;
-
-    if (cycle_count != 1 && myabs(prev_impurity - best_cur_error) < TOLERANCE)
-      break;
   }
+  
+  // Step 3: Fix init coeff and second coeff
   for (i = 1; i <= no_of_coeffs; i++) {
     coeff_array[i] = best_coeff_array[i];
   }
+  coeff_modified = TRUE;
   cur_error = best_cur_error;
-  if (cur_error != 0) {
-    new_error = cart_perturb_constant(cur_points, cur_no_of_points, cur_error);
-    if (alter_coefficients(cur_points, cur_no_of_points)) {
-      cur_error = new_error;
-    }
-  }
+  find_values(cur_points, cur_no_of_points);
+  set_counts(cur_points, cur_no_of_points, 1);
   return (cur_error);
 }
 
@@ -1122,16 +1146,16 @@ int cur_no_of_points; {
   int i, j = 0;
 
   for (i = 1; i <= no_of_coeffs; i++)
-    if (myabs(best_coeff_array[i] - modified_coeff_array[i]) > TOLERANCE) {
+    if (myabs(best_coeff_array[i] - coeff_array[i]) > TOLERANCE) {
       if (i != no_of_coeffs)
         for (j = 1; j <= cur_no_of_points; j++)
-          cur_points[j] -> val += (modified_coeff_array[i] - best_coeff_array[i]) *
+          cur_points[j] -> val += (coeff_array[i] - best_coeff_array[i]) *
           cur_points[j] -> dimension[i];
       else
         for (j = 1; j <= cur_no_of_points; j++)
-          cur_points[j] -> val += (modified_coeff_array[i] - best_coeff_array[i]);
+          cur_points[j] -> val += (coeff_array[i] - best_coeff_array[i]);
 
-      best_coeff_array[i] = modified_coeff_array[i];
+      best_coeff_array[i] = coeff_array[i];
     }
   if (j != 0) {
     set_counts(cur_points, cur_no_of_points, 1);
