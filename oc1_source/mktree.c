@@ -735,31 +735,27 @@ char * cur_label; {
   cycle_count = 0;
 
   while (TRUE) {
-    if (cur_error == 0.0) break;
+    if (cur_error == 0.0)
+    {
+      break;
+    }
     cycle_count++;
-    if (cycle_count != 1) prev_impurity = cur_error;
+    if (cycle_count != 1)
+    {
+      prev_impurity = cur_error;
+    }
 
     for (cur_coeff = 1; cur_coeff < no_of_coeffs; cur_coeff++) {
       new_error = cart_perturb(cur_points, cur_no_of_points, cur_coeff, cur_error);
       if (alter_coefficients(cur_points, cur_no_of_points)) {
-        if (veryverbose)
-          printf("\tCART hill climbing for coeff. %d. impurity %.3f -> %.3f\n",
-            cur_coeff, cur_error, new_error);
         cur_error = new_error;
-
-        // write_hyperplane(animationfile, cur_label);
         if (cur_error == 0) break;
       }
     }
     if (cur_error != 0) {
       new_error = cart_perturb_constant(cur_points, cur_no_of_points, cur_error);
       if (alter_coefficients(cur_points, cur_no_of_points)) {
-        if (veryverbose)
-          printf("\tCART hill climbing for coeff. %d. impurity %.3f -> %.3f\n",
-            no_of_coeffs, cur_error, new_error);
         cur_error = new_error;
-        
-        // write_hyperplane(animationfile, cur_label);
       }
     }
     if (cycle_count > MAX_CART_CYCLES)
@@ -799,10 +795,15 @@ char * cur_label; {
   }
 
   while (TRUE) {
-    if (cur_error == 0.0) break;
+    if (cur_error == 0.0)
+    {
+      break;
+    }
     cycle_count++;
-    if (cycle_count != 1) prev_impurity = best_cur_error;
-
+    if (cycle_count != 1)
+    {
+      prev_impurity = best_cur_error;
+    }
     for (cur_coeff = 1; cur_coeff < no_of_coeffs && cur_coeff != init_coeff; cur_coeff++) {
       new_error = cart_perturb(cur_points, cur_no_of_points, cur_coeff, cur_error);
       if (new_error <= best_cur_error) {
@@ -810,7 +811,10 @@ char * cur_label; {
           best_cur_error = new_error;
 
           // write_hyperplane(animationfile, cur_label);
-          if (best_cur_error == 0) break;
+          if (best_cur_error == 0)
+          {
+            break;
+          }
         }
       }
     }
