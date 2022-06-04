@@ -44,7 +44,7 @@ def dataPreprocessing():
     # Normalization
     scaler = StandardScaler()
     X = scaler.fit_transform(X)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.4, random_state=101)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.2, random_state=101)
     return X_train, X_test, y_train, y_test
 
 # X_train, X_test, y_train, y_test = train_test_split(*load_iris(return_X_y=True), test_size=.4, random_state=random_state)

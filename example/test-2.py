@@ -71,11 +71,11 @@ def get_results(X_train, y_train, X_test, y_test, classifiers):
 
 if __name__ == "__main__":
     X_train, X_test, y_train, y_test = dataPreprocessing()
-    oblique_tree = ObliqueTree(splitter="oc1", number_of_restarts=20, max_perturbations=5, random_state=random_state)
-    # bivariate_tree = ObliqueTree(splitter="cart", number_of_restarts=20, max_perturbations=5, random_state=random_state)
+    # oblique_tree = ObliqueTree(splitter="oc1", number_of_restarts=20, max_perturbations=5, random_state=random_state)
+    bivariate_tree = ObliqueTree(splitter="bivariate", number_of_restarts=20, max_perturbations=5, random_state=random_state)
     classifiers = {
-        "OC1": oblique_tree, 
-        # "Bivariate": bivariate_tree
+        # "OC1": oblique_tree, 
+        "Bivariate": bivariate_tree
     }
     results = get_results(X_train, y_train, X_test, y_test, classifiers)
     with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also

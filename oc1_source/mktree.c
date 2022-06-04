@@ -782,19 +782,18 @@ char * cur_label; {
   find_values(cur_points, cur_no_of_points);
   set_counts(cur_points, cur_no_of_points, 1);
   cur_error = compute_impurity(cur_no_of_points);
-  
+
+  // Store initial coeff_array into best_coeff_array
   best_cur_error = cur_error;
   for (i = 1; i <= no_of_coeffs; i++) {
     best_coeff_array[i] = coeff_array[i];
   }
-  // init_coeff = 1;
-  // for (i = 1; i < no_of_coeffs; i++) {
-  //   if (coeff_array[i] == 1) init_coeff = i;
-  // }
+
   for (init_coeff = 1; init_coeff < no_of_coeffs; init_coeff++)
   {
     for (second_coeff = 1; second_coeff < no_of_coeffs && second_coeff != init_coeff; second_coeff++)
     {
+      // Initiate coeff_array at each combination of init coeff and second coeff
       for (i = 1; i <= no_of_coeffs; i++) {
         if (i == init_coeff) coeff_array[i] = 1;
         else coeff_array[i] = 0;
@@ -817,19 +816,20 @@ char * cur_label; {
         }
         // Step 1: init_coeff
         new_error = cart_perturb(cur_points, cur_no_of_points, init_coeff, cur_error);
-        if (new_error <= cur_error && alter_coefficients(cur_points, cur_no_of_points)) {
+        if (new_error < cur_error && alter_coefficients(cur_points, cur_no_of_points)) {
           cur_error = new_error;
           if (cur_error == 0) break;
         }
         // Step 2: second_coeff
         new_error = cart_perturb(cur_points, cur_no_of_points, second_coeff, cur_error);
-        if (new_error <= cur_error && alter_coefficients(cur_points, cur_no_of_points)) {
+        if (new_error < cur_error && alter_coefficients(cur_points, cur_no_of_points)) {
           cur_error = new_error;
           if (cur_error == 0) break;
         }
         if (cur_error != 0) {
+          // Step 3: Fix init coeff and second coeff to perturb constant coeff T
           new_error = cart_perturb_constant(cur_points, cur_no_of_points, cur_error);
-          if (new_error <= cur_error && alter_coefficients(cur_points, cur_no_of_points)) {
+          if (new_error < cur_error && alter_coefficients(cur_points, cur_no_of_points)) {
             cur_error = new_error;
           }
         }
@@ -842,14 +842,13 @@ char * cur_label; {
           break;
       }
       if (cur_error < best_cur_error) {
-        update_coefficients(cur_points, cur_no_of_points);
+        for (i = 1; i <= no_of_coeffs; i++) best_coeff_array[i] = coeff_array[i];
         best_cur_error = cur_error;
         if (best_cur_error == 0) break;
       }
     }
   }
   
-  // Step 3: Fix init coeff and second coeff
   for (i = 1; i <= no_of_coeffs; i++) {
     coeff_array[i] = best_coeff_array[i];
   }
