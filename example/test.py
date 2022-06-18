@@ -50,6 +50,10 @@ def dataPreprocessing():
 # X_train, X_test, y_train, y_test = train_test_split(*load_iris(return_X_y=True), test_size=.4, random_state=random_state)
 X_train, X_test, y_train, y_test = dataPreprocessing()
 
+# Export training dataset into csv files
+pd.DataFrame(X_train).to_csv("train_x.csv", header=None, index=False)
+pd.DataFrame(y_train).to_csv("train_y.csv", header=None, index=False)
+
 tree.fit(X_train, y_train)
 
 predictions = tree.predict(X_test)
