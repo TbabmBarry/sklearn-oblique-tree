@@ -51,9 +51,9 @@ def dataPreprocessing():
 X_train, X_test, y_train, y_test = dataPreprocessing()
 
 # Export training dataset into csv files
-pd.DataFrame(X_train).to_csv("train_x.csv", header=None, index=False)
-pd.DataFrame(y_train).to_csv("train_y.csv", header=None, index=False)
-
+pd.DataFrame(X_train).to_csv("train_x.csv", index=False)
+pd.DataFrame(y_train).to_csv("train_y.csv", index=False)
+print(X_train.shape)
 tree.fit(X_train, y_train)
 
 predictions = tree.predict(X_test)
