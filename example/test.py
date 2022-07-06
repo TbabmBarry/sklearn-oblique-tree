@@ -47,12 +47,12 @@ def dataPreprocessing():
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.2, random_state=101)
     return X_train, X_test, y_train, y_test
 
-# X_train, X_test, y_train, y_test = train_test_split(*load_iris(return_X_y=True), test_size=.4, random_state=random_state)
-X_train, X_test, y_train, y_test = dataPreprocessing()
+X_train, X_test, y_train, y_test = train_test_split(*load_iris(return_X_y=True), test_size=.7, random_state=random_state)
+# X_train, X_test, y_train, y_test = dataPreprocessing()
 
 # Export training dataset into csv files
-pd.DataFrame(X_train).to_csv("train_x.csv", index=False)
-pd.DataFrame(y_train).to_csv("train_y.csv", index=False)
+pd.DataFrame(X_train).to_csv("train_x_iris.csv", index=False)
+pd.DataFrame(y_train).to_csv("train_y_iris.csv", index=False)
 print(X_train.shape)
 tree.fit(X_train, y_train)
 
