@@ -40,8 +40,9 @@ def dataPreprocessing():
     y = pgn['species']
 
     # Normalization
-    scaler = StandardScaler()
-    X = scaler.fit_transform(X)
+    # scaler = StandardScaler()
+    # X = scaler.fit_transform(X)
+    X = np.ascontiguousarray(X)
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=101)
     return X_train, X_test, y_train, y_test
 
