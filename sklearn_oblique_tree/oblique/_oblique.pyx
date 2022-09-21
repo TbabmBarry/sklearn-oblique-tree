@@ -123,7 +123,7 @@ cdef class Tree:
         return np.reshape(np.asarray(coefs), (node_cnt, attr_num))
 
     cpdef getTree(self):
-        cdef char[::1] desc = <char[:1024]> write_odtree(sklearn_root_node)
+        cdef char[::1] desc = <char[:16384]> write_odtree(sklearn_root_node)
         return np.asarray(desc)
 
 

@@ -499,7 +499,7 @@ float* export_coefs(cur_node)
   struct tree_node *curr;
   curr = cur_node;
   struct tree_node ** st;
-  st = (struct cur_node**)malloc(10 * sizeof(struct tree_node*));
+  st = (struct cur_node**)malloc(30 * sizeof(struct tree_node*));
   int num, k = 0;
   while (curr != NULL || num > 0)
   {
@@ -525,7 +525,7 @@ void write_node(cur_node, cur_char_index, dtree)
   char *dtree;
 {
   extern int no_of_dimensions, no_of_categories;
-  char *tmp_header = (char*)malloc(sizeof(char)*20);
+  char *tmp_header = (char*)malloc(sizeof(char)*60);
 
   // Append node header int dtree array
   if (strcmp(cur_node->label,"\0") == 0)
@@ -539,7 +539,7 @@ void write_node(cur_node, cur_char_index, dtree)
   }
 
   // Append class distribution into dtree array
-  char *tmp_left_label= (char*)malloc(sizeof(char)*30);
+  char *tmp_left_label= (char*)malloc(sizeof(char)*90);
   sprintf(tmp_left_label, "Left = [");
   for (int i = 1; i <= no_of_categories; i++)
   {
@@ -557,7 +557,7 @@ void write_node(cur_node, cur_char_index, dtree)
     dtree[(*cur_char_index)] = tmp_left_label[i];
     (*cur_char_index)++;
   }
-  char *tmp_right_label= (char*)malloc(sizeof(char)*40);
+  char *tmp_right_label= (char*)malloc(sizeof(char)*120);
   sprintf(tmp_right_label, "Right = [");
   for (int i = 1; i <= no_of_categories; i++)
   {
@@ -577,7 +577,7 @@ void write_node(cur_node, cur_char_index, dtree)
   }
 
   // Append oblique split int odtree array
-  char *tmp_split = (char*)malloc(sizeof(char)*100);
+  char *tmp_split = (char*)malloc(sizeof(char)*300);
   sprintf(tmp_split, "Oblique Split: ");
   for (int i = 1; i <= no_of_dimensions; i++)
   {
@@ -597,7 +597,7 @@ void write_node(cur_node, cur_char_index, dtree)
 float* write_odtree(cur_node)
   struct tree_node *cur_node;
 {
-  char* out = (char*)malloc(sizeof(char) * 1024);
+  char* out = (char*)malloc(sizeof(char) * 16384);
   struct tree_node *curr;
   curr = cur_node;
   int *cur_char_index = malloc(sizeof *cur_char_index);

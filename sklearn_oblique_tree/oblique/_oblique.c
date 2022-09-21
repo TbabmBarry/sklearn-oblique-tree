@@ -4795,7 +4795,7 @@ static PyObject *__pyx_pf_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_14getC
  *         return np.reshape(np.asarray(coefs), (node_cnt, attr_num))
  * 
  *     cpdef getTree(self):             # <<<<<<<<<<<<<<
- *         cdef char[::1] desc = <char[:1024]> write_odtree(sklearn_root_node)
+ *         cdef char[::1] desc = <char[:16384]> write_odtree(sklearn_root_node)
  *         return np.asarray(desc)
  */
 
@@ -4865,7 +4865,7 @@ static PyObject *__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_getTree
   /* "sklearn_oblique_tree/oblique/_oblique.pyx":126
  * 
  *     cpdef getTree(self):
- *         cdef char[::1] desc = <char[:1024]> write_odtree(sklearn_root_node)             # <<<<<<<<<<<<<<
+ *         cdef char[::1] desc = <char[:16384]> write_odtree(sklearn_root_node)             # <<<<<<<<<<<<<<
  *         return np.asarray(desc)
  * 
  */
@@ -4876,7 +4876,7 @@ static PyObject *__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_getTree
   }
   __pyx_t_2 = __pyx_format_from_typeinfo(&__Pyx_TypeInfo_char); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)0x400)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_t_1 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)0x4000)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_6 = __pyx_array_new(__pyx_t_1, sizeof(char), PyBytes_AS_STRING(__pyx_t_2), (char *) "c", (char *) __pyx_t_5);
   if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 126, __pyx_L1_error)
@@ -4891,7 +4891,7 @@ static PyObject *__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_getTree
 
   /* "sklearn_oblique_tree/oblique/_oblique.pyx":127
  *     cpdef getTree(self):
- *         cdef char[::1] desc = <char[:1024]> write_odtree(sklearn_root_node)
+ *         cdef char[::1] desc = <char[:16384]> write_odtree(sklearn_root_node)
  *         return np.asarray(desc)             # <<<<<<<<<<<<<<
  * 
  * 
@@ -4928,7 +4928,7 @@ static PyObject *__pyx_f_20sklearn_oblique_tree_7oblique_8_oblique_4Tree_getTree
  *         return np.reshape(np.asarray(coefs), (node_cnt, attr_num))
  * 
  *     cpdef getTree(self):             # <<<<<<<<<<<<<<
- *         cdef char[::1] desc = <char[:1024]> write_odtree(sklearn_root_node)
+ *         cdef char[::1] desc = <char[:16384]> write_odtree(sklearn_root_node)
  *         return np.asarray(desc)
  */
 
